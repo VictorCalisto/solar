@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  ruby:
+    container_name: ruby
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - gems:/usr/local/bundle # facilita na hora do bundle install -j $(nproc)
+    depends_on:
+      - postgres  
+
+  postgres:
+    container_name: postgres
+    image: postgres:16-bookworm # Cuidado com imagens base alpine
+    restart: always
+    environment:
+      #host do banco visto por dentro do é o nome do serviço por fora e localhost
+      POSTGRES_HOST_AUTH_METHOD: trust # Para quando não precisa de senha
+      #POSTGRES_PASSWORD: senha
+      #POSTGRES_USER: usuario
+      #POSTGRES_DB: nome_do_banco
+    volumes:
+      - data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  gems:
+  data:
