@@ -23,7 +23,7 @@ else
   cp Dockerfile docker-compose.yml .gitignore .dockerignore README.md /tmp
 
   # Crie um novo projeto Rails
-  rails new . --css=bootstrap --javascript=esbuild &&
+  rails new . &&
   bundle install -j $(nproc) &&
 
   # Copia os arquivos da pasta /tmp de volta para a pasta atual, sobrescrevendo os existentes
