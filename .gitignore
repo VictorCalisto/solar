@@ -40,8 +40,6 @@ config/rest.http
 /.rakeTasks
 
 # /config/
-/config/database.yml
-/config/database.yaml
 /config/resque.yml
 /config/resque-pool.yml
 /config/unicorn/localhost.rb
@@ -83,7 +81,6 @@ settings.json
 /.bundle
 
 # Ignore all environment files (except templates).
-/.env*
 !/.env*.erb
 
 # Ignore all logfiles and tempfiles.
