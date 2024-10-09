@@ -1,2 +1,13 @@
-<h1>Pages#contato</h1>
-<p>Find me in app/views/pages/contato.html.erb</p>
+<h3>Economia Verde</h3>
+<p>Poupe salvando o planeta</p>
+
+<%= form_with(model: @page, local: true) do |form| %>
+  <div>
+    <%= form.label :valor, "Digite o valor da sua fatura de energia em R$:" %>
+    <%= form.text_field :valor, id: "valor", oninput: "formatarValor(this)", placeholder: "R$ 0,00", required: true %>
+  </div>
+  
+  <div>
+    <%= form.submit "Enviar" %>
+  </div>
+<% end %>
