@@ -1,0 +1,15 @@
+<h3>Economia Verde</h3>
+<p>Poupe salvando o planeta</p>
+<%= content_tag :div do %>
+  <%= content_tag :label, "Digite o valor da sua fatura de energia em R$:", for: "valor" %>
+  <%= text_field_tag :valor, nil, id: "valor", oninput: "formatarValor(this)", placeholder: "R$ 0,00", required: true %>
+  <%= content_tag :span, "Valor inválido. Digite apenas números positivos.", id: "erro", style: "color: red; display: none;" %>
+<% end %>
+<p id="resultado"></p>
+
+<script>
+  var inflacao = <%= @inflacao.to_f %>;
+  var chocolate = <%= @chocolate.to_f %>;
+  var cerveja = <%= @cerveja.to_f %>;
+  calcularValor(inflacao,chocolate,cerveja);
+</script>
