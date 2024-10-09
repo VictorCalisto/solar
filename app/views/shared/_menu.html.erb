@@ -1,7 +1,88 @@
-<nav>
-  <ul>
-    <li><%= link_to 'Home', pages_home_path %></li>
-    <li><%= link_to 'Contato', pages_contato_path %></li>
-    <li><%= link_to 'Informações', pages_informacoes_path %></li>
-  </ul>
-</nav>
+
+  <style>
+    /* Estilos gerais */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Estilos do menu lateral */
+    .sidebar {
+      height: 100%; /* Altura total da página */
+      width: 250px; /* Largura do menu */
+      position: fixed; /* Fixa o menu na lateral */
+      top: 0;
+      left: 0;
+      background-color: #333; /* Cor de fundo do menu */
+      padding-top: 20px;
+      transition: 0.3s; /* Animação suave para abrir/fechar */
+      overflow-x: hidden; /* Esconde barra de rolagem horizontal */
+    }
+
+    .sidebar a {
+      padding: 15px 10px;
+      text-decoration: none;
+      font-size: 18px;
+      display: block;
+      transition: 0.2s;
+    }
+
+    /* Estilo do botão para abrir/fechar o menu */
+    .open-btn {
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #333;
+      border: none;
+      padding: 10px 15px;
+      position: fixed;
+      top: 20px;
+      left: 250px; /* Ajusta a posição ao lado do menu */
+      transition: left 0.3s;
+    }
+
+    /* Quando o menu é fechado */
+    .sidebar.closed {
+      width: 0;
+    }
+
+    .open-btn.closed {
+      left: 20px; /* Coloca o botão na borda esquerda */
+    }
+
+    /* Estilos do conteúdo da página */
+    .content {
+      margin-left: 260px; /* Espaço para o menu lateral */
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    .content.closed {
+      margin-left: 40px;
+    }
+  </style>
+
+  <button id="toggleBtn" class="open-btn" onclick="toggleSidebar()">☰</button>
+
+  <div id="mySidebar" class="sidebar">
+    <ul>
+      <li><%= link_to 'Home', pages_home_path %></li>
+      <li><%= link_to 'Contato', pages_contato_path %></li>
+      <li><%= link_to 'Informações', pages_informacoes_path %></li>
+    </ul>
+  </div>
+
+  <!-- JavaScript para alternar o menu -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('mySidebar');
+      const content = document.getElementById('mainContent');
+      const button = document.getElementById('toggleBtn');
+
+      // Alterna a classe 'closed' para abrir/fechar o menu
+      sidebar.classList.toggle('closed');
+      content.classList.toggle('closed');
+      button.classList.toggle('closed');
+    }
+  </script>
+
