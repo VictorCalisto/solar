@@ -1,2 +1,60 @@
-<h1>Pages#informacoes</h1>
-<p>Find me in app/views/pages/informacoes.html.erb</p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energia Solar e Seus Benefícios</title>
+    <link rel="stylesheet" href="./informacoes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<body>
+    <header>
+        <img src="./tumblr_pfmczu7cRr1vz587no2_1280.png" alt="Energia Solar">
+        <h1 id="main-title">Energia Solar</h1>
+        <p>Uma fonte limpa e renovável para o futuro.</p>
+    </header>
+    <main>
+        <section>
+            <h2>O que é a Energia Solar?</h2>
+            <p>A energia solar é uma fonte de energia renovável e limpa que é obtida a partir da luz e do calor do sol. Ela pode ser convertida em eletricidade ou calor, e é uma alternativa sustentável às fontes de energia convencionais, que emitem poluentes. A energia solar é obtida por meio de tecnologias como a <u>fotovoltaica</u> e a <u>solar térmica:</u></p>
+        </section>
+        
+        <section>
+            <h2>Energia solar <span class="highlight">fotovoltaica:</span></h2>
+            <ul>
+              <span>A luz solar é convertida em eletricidade por meio de painéis solares. Os raios solares atingem as placas solares, fazendo com que as células fotovoltaicas se movimentem e criem uma corrente elétrica.</span>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Energia solar <span class="highlight">térmica:</span></h2>
+            <ul>
+              <span>O calor da radiação solar é transferido para água ou óleo, para posteriormente ser utilizado como fonte de calor.</span>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Benefícios da Energia Solar</h2>
+            <ul>
+                <li>Redução das emissões de carbono</li>
+                <li>Menor dependência de combustíveis fósseis</li>
+                <li>Economia a longo prazo com contas de energia</li>
+                <li>Baixo custo de manutenção</li>
+                <li>Geração de empregos na indústria solar</li>
+            </ul>
+        </section>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const title = document.getElementById("main-title");
+            title.classList.add("animate__animated", "animate__fadeIn");
+
+            const sections = document.querySelectorAll("section");
+            sections.forEach((section, index) => {
+                section.classList.add("animate__animated", "animate__fadeInUp");
+                section.style.animationDelay = `${index * 0.31}s`; // Delay para cada seção
+            });
+        });
+    </script>
+</body>
+</html>
