@@ -1,5 +1,5 @@
 # Fixe a sua versao de rubi ao subir o projeto
-FROM ruby
+FROM ruby:3.3.5
 
 # Atualizar os pacotes e instalar as dependências
 RUN apt-get update -y
@@ -7,26 +7,24 @@ RUN apt-get update -y
 # Instala dependencias
 RUN apt-get install -qy --no-install-recommends \
     curl \
-    gpg \
-    autoconf  \
-    bison  \
-    build-essential  \
-    libssl-dev  \
-    libyaml-dev  \
-    libreadline6-dev  \
-    zlib1g-dev  \
-    libncurses5-dev  \
-    libffi-dev  \
-    libgdbm6  \
-    libgdbm-dev \
+    postgresql \ 
+    postgresql-client \
+    build-essential \
     libpq-dev \
-    postgresql-client
-
-# Instalar o Rails
-RUN /bin/bash -l -c "gem install rails"
+    libaio1
 
 # Define o diretório de trabalho
 WORKDIR /app
+
+# A versao do Rails esta fixada no Gemfile
+COPY . /app
+
+# Instala o Bundler
+RUN gem install bundler
+RUN bundle install -j $(nproc)
+
+# Compila os Assets
+RUN rails assets:precompile
 
 # Limpar o cache do apt-get e outros arquivos temporários
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -34,7 +32,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Tratamento de erros
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-ENTRYPOINT ["sh","/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+
+# Sobe o Servidor
+CMD [ "sh", "-c", "bundle exec rails server -b 0.0.0.0" ]
 
 # Torna o container debugavel
-CMD ["sh", "-c", "sleep infinity"]
+# CMD ["sh", "-c", "sleep infinity"]
