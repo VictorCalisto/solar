@@ -23,13 +23,11 @@ COPY . /app
 RUN gem install bundler
 RUN bundle install -j $(nproc)
 
-# Compila os Assets
-RUN rails assets:precompile
-
 # Limpar o cache do apt-get e outros arquivos temporários
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Tratamento de erros
+RUN mkdir -p /usr/local/bin/
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
