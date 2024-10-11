@@ -1,15 +1,54 @@
-<h3>Economia Verde</h3>
-<p>Poupe salvando o planeta</p>
-<%= content_tag :div do %>
-  <%= content_tag :label, "Digite o valor da sua fatura de energia em R$:", for: "valor" %>
-  <%= text_field_tag :valor, nil, id: "valor", oninput: "formatarValor(this)", placeholder: "R$ 0,00", required: true %>
-  <%= content_tag :span, "Valor inválido. Digite apenas números positivos.", id: "erro", style: "color: red; display: none;" %>
+<div>
+<h3 id="titulo">Economia Verde</h3>
+<p id="apresentacao">Poupe salvando o planeta</p>
+<% if @resultado == nil%>
+<a href="/pages/informacoes" id="link" class="link">Veja a importância da Pensar Verde</a>
+</div>
+
+  <%= form_with(model: @page, url: pages_home_path, method: :post) do |form| %>
+  <div>
+    <label for="valor" id="label" class="label">Digite o valor da sua fatura de energia em R$:</label>
+    <input type="text" id="input" name="valor" oninput="formatarValor(this)" placeholder="R$ 0,00" required min="0.01" class="input">
+    <span id="span" class="span" style="color: red; display: none;">Valor inválido.</span>
+  </div>
+
+  <div>
+    <button type="submit">Enviar</button>
+  </div>
+
+  <% end %>
 <% end %>
-<p id="resultado"></p>
+
+
+<% if @resultado!=nil%>
+  <h3>O que você pode fazer com <%= @resultado[:total] %> economizados?</h3>
+  <ul>
+    <li><%= @resultado[:chocolates] %> Chocolates</li>
+    <li><%= @resultado[:cervejas] %> Cervejas</li>
+    <li><%= @resultado[:pizzas] %> Pizzas</li>
+  </ul>
+<%@resultado=nil%>
+<% end %>
 
 <script>
-  var inflacao = <%= @inflacao.to_f %>;
-  var chocolate = <%= @chocolate.to_f %>;
-  var cerveja = <%= @cerveja.to_f %>;
-  calcularValor(inflacao,chocolate,cerveja);
+  function formatarValor(input) {
+    let valor = input.value.replace(/[^\d]/g, "");
+  
+    if (valor) {
+      valor = (parseFloat(valor) / 100).toFixed(2);
+    } else {
+      valor = "0.00";
+    }
+  
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(".", ",");
+    valor = `R$ ${valor}`;
+  
+    input.value = valor;
+  
+    if (valor === "R$ 0,00") {
+      document.getElementById("erro").style.display = "inline"; // Exibe mensagem de erro
+    } else {
+      document.getElementById("erro").style.display = "none"; // Oculta mensagem de erro
+    }
+  } 
 </script>
