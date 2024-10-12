@@ -1,4 +1,5 @@
 class Page < ApplicationRecord
+
   INFLACAO_ANUAL = 7.65
   PRECO_CERVEJA = 10
   PRECO_PIZZA = 60
@@ -13,10 +14,11 @@ class Page < ApplicationRecord
       12.times { total_acumulado += valor_mensal }  
       valor_mensal *= (1 + inflacao_mensal)
     end
+    
     total_acumulado = total_acumulado.round(2)
-    cervejas = (total_acumulado / PRECO_CERVEJA).round(2)
-    pizzas = (total_acumulado / PRECO_PIZZA).round(2)
-    chocolates = (total_acumulado / PRECO_CHOCOLATE).round(2)
+    cervejas = (total_acumulado / PRECO_CERVEJA).floor
+    pizzas = (total_acumulado / PRECO_PIZZA).floor
+    chocolates = (total_acumulado / PRECO_CHOCOLATE).floor
 
     {
       total: total_acumulado,

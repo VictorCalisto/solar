@@ -1,0 +1,82 @@
+<%= form_with(model: contato) do |form| %>
+  <% if contato.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(contato.errors.count, "error") %> prohibited this contato from being saved:</h2>
+
+      <ul>
+        <% contato.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <label for="contato_nome" style="display: block">Nome</label>
+    <input type="text" name="contato[nome]" id="contato_nome" pattern="[A-Za-zÀ-Ö ]+" title="O nome deve conter apenas letras e espaços." required>
+  </div>
+
+  <div>
+    <label for="contato_email" style="display: block">Email</label>
+    <input type="text" name="contato[email]" id="contato_email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Por favor, insira um email válido (ex: usuario@dominio.com)" required>
+  </div>
+
+  <div>
+    <label for="contato_telefone" style="display: block">Telefone</label>
+    <input type="text" name="contato[telefone]" id="contato_telefone" placeholder="(xx)x xxxx xxxx" oninput="formatarTelefone(this)" maxlength="15" minlength="14" required>
+    <label for="mesmoTelefone">É Whatsapp ?</label>
+    <input type="checkbox" id="mesmoTelefone" checked onclick="toggleWhatsapp(this)">
+  </div>
+
+ <div>
+    <label for="contato_whatsapp" style="display: none" id="label_whatsapp">Whatsapp</label>
+    <input type="text" name="contato[whatsapp]" style="display: none" id="contato_whatsapp" placeholder="(xx)x xxxx xxxx" oninput="formatarTelefone(this)" maxlength="15" minlength="14">
+  </div>
+
+  <div>
+      <label for="contato_horario_preferencial" style="display: block">Horário Preferencial</label>
+      <input type="time" name="contato[horario_preferencial]" id="contato_horario_preferencial" required>
+  </div>
+
+  <div>
+      <input type="submit" value="Enviar">
+  </div>
+  <script>
+function limparFormato(input) {
+    // Remove a formatação enquanto o usuário está digitando
+    input.value = input.value.replace(/\D/g, "");
+}
+function formatarTelefone(input) {
+    // Remove qualquer caractere que não seja dígito
+    let valor = input.value.replace(/\D/g, "");
+
+    // Limita o número de dígitos a 11 (para o formato brasileiro)
+    if (valor.length > 11) {
+        valor = valor.substring(0, 11); // Trunca o valor para 11 dígitos
+    }
+
+    // Verifica o comprimento e formata o número de telefone
+    if (valor.length === 11) {
+        valor = valor.replace(/^(\d{2})(\d)(\d{4})(\d{4})$/, "($1)$2 $3-$4");
+    } else if (valor.length === 10) {
+        valor = valor.replace(/^(\d{2})(\d{4})(\d{4})$/, "($1) $2-$3");
+    } else if (valor.length >= 2) {
+        valor = valor.replace(/^(\d{2})(\d{0,1})$/, "($1)$2");
+    }
+
+    function toggleWhatsapp(checkbox) {
+        const whatsapp = document.getElementById("contato_whatsapp");
+        const label =  document.getElementById("label_whatsapp");
+        if (checkbox.checked) {
+            // Se a checkbox estiver marcada, oculta o campo de WhatsApp
+            whatsapp.style.display = "none";
+            label.style.display = "none"
+        } else {
+            // Se não estiver marcada, mostra o campo de WhatsApp
+            whatsapp.style.display = "block";
+            label.style.display = "block";
+
+        }
+    }
+  </script>
+<% end %>
