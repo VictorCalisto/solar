@@ -23,11 +23,12 @@
 
 
 <% if @resultado!=nil%>
-  <h3>O que você pode fazer com <%= @resultado[:total] %> economizados?</h3>
+  <p>Ao longo de 10 anos você poderia economizar <%= @resultado[:total] %> levando em conta a inflacao média em reais dos últimos 10 anos.</p>
+  <p>Veja o que você poderia fazer com esse dinehiro :</p>
   <ul>
-    <li><%= @resultado[:chocolates] %> Chocolates</li>
-    <li><%= @resultado[:cervejas] %> Cervejas</li>
-    <li><%= @resultado[:pizzas] %> Pizzas</li>
+    <li>Comprar <%= @resultado[:chocolates] %> chocolates</li>
+    <li>Comprar <%= @resultado[:cervejas] %> cervejas</li>
+    <li>Comprar <%= @resultado[:pizzas] %> pizzas</li>
   </ul>
 <%= form_with(model: @page, url: pages_home_path, method: :post) do |form| %>
     <a href="/pages/home"id="reset">Começar a Economizar</label>
