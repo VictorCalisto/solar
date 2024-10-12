@@ -8,9 +8,10 @@ class Page < ApplicationRecord
 
   def self.calcular_quantidade(valor_mensal)
     total_acumulado = 0
+    inflacao_mensal = converter_inflacao_anual_para_mensal()
     10.times do |ano|
       12.times { total_acumulado += valor_mensal }  
-      total_acumulado *= (1 + INFLACAO_ANUAL)
+      valor_mensal *= (1 + inflacao_mensal)
     end
     total_acumulado = total_acumulado.round(2)
     cervejas = (total_acumulado / PRECO_CERVEJA).round(2)
@@ -23,5 +24,13 @@ class Page < ApplicationRecord
       pizzas: pizzas,
       chocolates: chocolates
     }
+  end
+  private
+  def self.converter_inflacao_anual_para_mensal()
+    inflacao_decimal = INFLACAO_ANUAL / 100.0
+  
+    inflacao_mensal = (1 + inflacao_decimal) ** (1.0 / 12) - 1
+  
+    (inflacao_mensal * 100)
   end
 end

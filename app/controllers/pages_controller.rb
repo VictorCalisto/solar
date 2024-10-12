@@ -1,18 +1,23 @@
 class PagesController < ApplicationController
-  
+  include PagesHelper
+
   def home
     if request.get?
       page = Page.new
       @resultado = nil
+
     elsif request.post?
-      valor = params[:valor].gsub("R$", "").gsub(",", "").to_f
-      @resultado = Page.calcular_quantidade(valor)
+      valor = formatar_valor(params[:valor])
+      page = Page.new(valor: valor)
+      
+      if page.valid?
+        @resultado = Page.calcular_quantidade(valor)
+      else
+        @errors = page.errors.full_messages
+      end
 
     end
     
-  end
-
-  def contato
   end
 
   def informacoes
