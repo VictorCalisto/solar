@@ -1,11 +1,12 @@
 <% content_for :title, "New contato" %>
 
-<h1>New contato</h1>
-
-<%= render "form", contato: @contato %>
-
-<br>
-
+<h3>Contato</h3>
 <div>
-  <%= link_to "Back to contatos", contatos_path %>
+  <p>Entre em contato conosco para saber mais informações e instalar sua central solar na sua casa ou na sua empresa.</p>
+  <p>Telefone e Whatsapp: (62) 4002 9822</p>
+  <p>Email: contato@suaempresaaqui.com</p>
+</div>
+<div>
+  <p><strong>Se prefirir, nos entramos em contato com você</strong></p>
+  <%= render "form", contato: @contato %>
 </div>

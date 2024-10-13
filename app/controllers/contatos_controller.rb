@@ -21,11 +21,22 @@ class ContatosController < ApplicationController
 
   # POST /contatos or /contatos.json
   def create
+    # contato_params_modificados = contato_params
+
+    # if contato_params[:mesmoTelefone] == "true"
+    #   contato_params_modificados[:whatsapp] = contato_params[:telefone]
+    # end
+
     @contato = Contato.new(contato_params)
+    @contato.mesmoTelefone = params[:contato][:mesmoTelefone]
+
+    if @contato.mesmoTelefone == "true"
+      @contato.whatsapp = @contato.telefone
+    end
 
     respond_to do |format|
       if @contato.save
-        format.html { redirect_to @contato, notice: "Contato was successfully created." }
+        format.html { redirect_to @contato, notice: "Valor de mesmoTelefone: #{@contato.mesmoTelefone}" }
         format.json { render :show, status: :created, location: @contato }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,6 +44,7 @@ class ContatosController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /contatos/1 or /contatos/1.json
   def update
@@ -65,6 +77,6 @@ class ContatosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contato_params
-      params.require(:contato).permit(:nome, :email, :telefone, :whatsapp, :horario_preferencial)
+      params.require(:contato).permit(:nome, :email, :telefone, :whatsapp, :horario_preferencial,:mesmoTelefone)
     end
 end

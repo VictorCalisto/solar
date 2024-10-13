@@ -13,7 +13,7 @@
 
   <div>
     <label for="contato_nome" style="display: block">Nome</label>
-    <input type="text" name="contato[nome]" id="contato_nome" pattern="[A-Za-zÀ-Ö ]+" title="O nome deve conter apenas letras e espaços." required>
+    <input type="text" name="contato[nome]" id="contato_nome" pattern="[a-zA-ZÀ-ÿ\s]+" title="O nome deve conter apenas letras e espaços." required>
   </div>
 
   <div>
@@ -23,14 +23,14 @@
 
   <div>
     <label for="contato_telefone" style="display: block">Telefone</label>
-    <input type="text" name="contato[telefone]" id="contato_telefone" placeholder="(xx)x xxxx xxxx" oninput="formatarTelefone(this)" maxlength="15" minlength="14" required>
+    <input type="text" name="contato[telefone]" id="contato_telefone" placeholder="(xx)x xxxx xxxx" onclick="formatarTelefone(this)" maxlength="11" minlength="10" required>
     <label for="mesmoTelefone">É Whatsapp ?</label>
-    <input type="checkbox" id="mesmoTelefone" checked onclick="toggleWhatsapp(this)">
+    <input type="checkbox" id="mesmoTelefone" checked value="true" onclick="toggleWhatsapp(this)">
   </div>
 
- <div>
+  <div>
     <label for="contato_whatsapp" style="display: none" id="label_whatsapp">Whatsapp</label>
-    <input type="text" name="contato[whatsapp]" style="display: none" id="contato_whatsapp" placeholder="(xx)x xxxx xxxx" oninput="formatarTelefone(this)" maxlength="15" minlength="14">
+    <input type="text" name="contato[whatsapp]" style="display: none" id="contato_whatsapp" placeholder="(xx)x xxxx xxxx" onclick="formatarTelefone(this)" maxlength="11" minlength="10">
   </div>
 
   <div>
@@ -42,41 +42,38 @@
       <input type="submit" value="Enviar">
   </div>
   <script>
-function limparFormato(input) {
-    // Remove a formatação enquanto o usuário está digitando
-    input.value = input.value.replace(/\D/g, "");
-}
-function formatarTelefone(input) {
-    // Remove qualquer caractere que não seja dígito
-    let valor = input.value.replace(/\D/g, "");
-
-    // Limita o número de dígitos a 11 (para o formato brasileiro)
-    if (valor.length > 11) {
-        valor = valor.substring(0, 11); // Trunca o valor para 11 dígitos
+    function limparFormato(input) {
+      // Remove a formatação enquanto o usuário está digitando
+      input.value = input.value.replace(/\D/g, "");
     }
+    function formatarTelefone(input) {
+      let valor = input.value.replace(/\D/g, "");
 
-    // Verifica o comprimento e formata o número de telefone
-    if (valor.length === 11) {
-        valor = valor.replace(/^(\d{2})(\d)(\d{4})(\d{4})$/, "($1)$2 $3-$4");
-    } else if (valor.length === 10) {
-        valor = valor.replace(/^(\d{2})(\d{4})(\d{4})$/, "($1) $2-$3");
-    } else if (valor.length >= 2) {
-        valor = valor.replace(/^(\d{2})(\d{0,1})$/, "($1)$2");
+      if (valor.length > 11) {
+          valor = valor.substring(0, 11);
+      }
+
+      if (valor.length === 11) {
+          valor = valor.replace(/^(\d{2})(\d)(\d{4})(\d{4})$/, "($1)$2 $3-$4");
+      } else if (valor.length === 10) {
+          valor = valor.replace(/^(\d{2})(\d{4})(\d{4})$/, "($1) $2-$3");
+      } else if (valor.length >= 2) {
+          valor = valor.replace(/^(\d{2})(\d{0,1})$/, "($1)$2");
+      }
     }
 
     function toggleWhatsapp(checkbox) {
-        const whatsapp = document.getElementById("contato_whatsapp");
-        const label =  document.getElementById("label_whatsapp");
-        if (checkbox.checked) {
-            // Se a checkbox estiver marcada, oculta o campo de WhatsApp
-            whatsapp.style.display = "none";
-            label.style.display = "none"
-        } else {
-            // Se não estiver marcada, mostra o campo de WhatsApp
-            whatsapp.style.display = "block";
-            label.style.display = "block";
-
-        }
+      const whatsapp = document.getElementById("contato_whatsapp");
+      const label =  document.getElementById("label_whatsapp");
+      if (checkbox.checked) {
+        whatsapp.style.display = "none";
+        label.style.display = "none";
+        checkbox.value = "true";
+      } else {
+        whatsapp.style.display = "block";
+        label.style.display = "block";
+        checkbox.value = "false";
+      }
     }
   </script>
 <% end %>
