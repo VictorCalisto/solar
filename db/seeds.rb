@@ -8,13 +8,13 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 # Criando ou encontrando o usuário Atendente
-User.find_or_create_by!(email: 'atendente@examplo.com') do |user|
+User.find_or_create_by!(email: 'atendente@exemplo.com') do |user|
   user.password = '123456'
   user.password_confirmation = '123456'
 end
 
 # Criando ou encontrando o usuário Chefe
-User.find_or_create_by!(email: 'chefe@examplo.com') do |user|
+User.find_or_create_by!(email: 'chefe@exemplo.com') do |user|
   user.password = '123456'
   user.password_confirmation = '123456'
 end
