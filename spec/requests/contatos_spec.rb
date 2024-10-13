@@ -33,14 +33,6 @@ RSpec.describe "/contatos", type: :request do
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      contato = Contato.create! valid_attributes
-      get contato_url(contato)
-      expect(response).to be_successful
-    end
-  end
-
   describe "GET /new" do
     it "renders a successful response" do
       get new_contato_url

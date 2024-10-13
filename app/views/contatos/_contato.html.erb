@@ -1,27 +1,29 @@
-<div id="<%= dom_id contato %>">
-  <p>
-    <strong>Nome:</strong>
-    <%= contato.nome %>
-  </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= contato.email %>
-  </p>
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Whatsapp</th>
+      <th>Horário Preferencial</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contatos.each do |contato| %>
+      <tr>
+        <td><%= contato.nome %></td>
+        <td><%= contato.email %></td>
+        <td><%= formata_telefone(contato.telefone)%></td>
+        <td><%= formata_telefone(contato.whatsapp) %></td>
+        <td><%= formata_hora(contato.horario_preferencial) %></td>
+        <td>
+          <%= link_to "Editar", edit_contato_path(contato) %>
+          <%= button_to "Deletar",contato, method: :delete, data: { confirm: "Você tem certeza que deseja deletar este contato?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-  <p>
-    <strong>Telefone:</strong>
-    <%= contato.telefone %>
-  </p>
-
-  <p>
-    <strong>Whatsapp:</strong>
-    <%= contato.whatsapp %>
-  </p>
-
-  <p>
-    <strong>Horario preferencial:</strong>
-    <%= contato.horario_preferencial %>
-  </p>
-
-</div>

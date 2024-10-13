@@ -5,12 +5,5 @@
 <h1>Contatos</h1>
 
 <div id="contatos">
-  <% @contatos.each do |contato| %>
-    <%= render contato %>
-    <p>
-      <%= link_to "Show this contato", contato %>
-    </p>
-  <% end %>
+    <%= render "contato" %>
 </div>
-
-<%= link_to "New contato", new_contato_path %>

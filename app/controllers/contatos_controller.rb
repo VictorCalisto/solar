@@ -1,16 +1,12 @@
 class ContatosController < ApplicationController
-  before_action :authenticate_user! , only: %i[ show edit update destroy index]
-  before_action :set_contato, only: %i[ show edit update destroy ]
+  before_action :authenticate_user! , only: %i[ edit update destroy index]
+  before_action :set_contato, only: %i[ edit update destroy ]
 
   # GET /contatos or /contatos.json
   def index
     @contatos = Contato.all
   end
-
-  # GET /contatos/1 or /contatos/1.json
-  def show
-  end
-
+  
   # GET /contatos/new
   def new
     @contato = Contato.new

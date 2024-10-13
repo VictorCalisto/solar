@@ -10,10 +10,6 @@ RSpec.describe ContatosController, type: :routing do
       expect(get: "/contatos/new").to route_to("contatos#new")
     end
 
-    it "routes to #show" do
-      expect(get: "/contatos/1").to route_to("contatos#show", id: "1")
-    end
-
     it "routes to #edit" do
       expect(get: "/contatos/1/edit").to route_to("contatos#edit", id: "1")
     end

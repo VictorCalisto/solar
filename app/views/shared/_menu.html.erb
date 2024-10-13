@@ -150,13 +150,19 @@
 
 <div id="mySidebar" class="sidebar">
   <ul>
-      <li><a href="/pages/home">Home</a></li>
-      <li><a href="/contatos/new">Contato</a></li>
-      <li><a href="/pages/informacoes">Informações</a></li>
       <% if user_signed_in? %>
-      <li><a href="/contatos">Contato</a></li>
+        <li><a href="/pages/home">Home</a></li>
+        <li><a href="/pages/informacoes">Informações</a></li>
+        <li><a href="/contatos">Contatos cadastrados</a></li>
+        <li><a href="/contatos/new">Cadastrar Contato</a></li>
+        <li>
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, data: {turbo_method: :delete } %>
+        </li>
       <% else %>
-      <li><a href="/users/sign_in">Intranet</a></li>
+        <li><a href="/pages/home">Home</a></li>
+        <li><a href="/contatos/new">Contato</a></li>
+        <li><a href="/pages/informacoes">Informações</a></li>
+        <li><a href="/contatos">Intranet</a></li>
       <% end %>
   </ul>
 </div>
