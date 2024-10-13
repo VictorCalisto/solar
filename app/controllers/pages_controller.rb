@@ -2,32 +2,35 @@ class PagesController < ApplicationController
   include PagesHelper
 
   def home
-    @page = Page.new
-
     if request.get?
       @resultado = nil
-      
+
     elsif request.post?
       valor = formatar_valor(params[:valor])
-      @page = Page.new(valor: valor)
+      
+      # Atribui o valor ao atributo de classe `valor`
+      Page.valor = valor  
 
-      if @page.valid?
+      # Como não estamos validando uma instância, a validação deve ser adaptada
+      if valor.present? && valor.is_a?(Numeric) # Exemplo simples de validação
         @resultado = Page.calcular_quantidade(valor)
-        @resultado[:total]= formatar_numero(@resultado[:total])
-        @resultado[:cervejas]= formatar_numero(@resultado[:cervejas])
-        @resultado[:pizzas]= formatar_numero(@resultado[:pizzas])
-        @resultado[:chocolates]= formatar_numero(@resultado[:chocolates])
-        @resultado
-
+        
+        # Formata os resultados antes de exibir
+        @resultado[:total] = formatar_numero(@resultado[:total])
+        @resultado[:cervejas] = formatar_numero(@resultado[:cervejas])
+        @resultado[:pizzas] = formatar_numero(@resultado[:pizzas])
+        @resultado[:chocolates] = formatar_numero(@resultado[:chocolates])
+        
       else
-        @errors = @page.errors.full_messages
-        flash.now[:alert] = "Digite um valor valido."
+        @errors = ["Valor inválido"]
+        flash.now[:alert] = "Digite um valor válido."
       end
     end
   end
   
   
+  
   def informacoes
   end
   
-end
+end 

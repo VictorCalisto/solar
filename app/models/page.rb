@@ -5,7 +5,7 @@ class Page < ApplicationRecord
   PRECO_PIZZA = 60
   PRECO_CHOCOLATE = 10
 
-  attr_accessor :valor
+  @valor = nil
 
   validates :valor, presence: true, numericality: { greater_than: 0, message: "Minimo 0,01" }
 
@@ -37,4 +37,9 @@ class Page < ApplicationRecord
   
     (inflacao_mensal * 100)
   end
+
+  class << self
+    attr_accessor :valor
+  end
+
 end
