@@ -1,4 +1,5 @@
 class ContatosController < ApplicationController
+  before_action :authenticate_user! , only: %i[ show edit update destroy index]
   before_action :set_contato, only: %i[ show edit update destroy ]
 
   # GET /contatos or /contatos.json

@@ -153,17 +153,20 @@
       <li><a href="/pages/home">Home</a></li>
       <li><a href="/contatos/new">Contato</a></li>
       <li><a href="/pages/informacoes">Informações</a></li>
+      <% if user_signed_in? %>
+      <li><a href="/contatos">Contato</a></li>
+      <% else %>
+      <li><a href="/users/sign_in">Intranet</a></li>
+      <% end %>
   </ul>
 </div>
 
-<!-- JavaScript para alternar o menu -->
 <script>
   function toggleSidebar() {
       const sidebar = document.getElementById('mySidebar');
       const content = document.getElementById('mainContent');
       const button = document.getElementById('toggleBtn');
 
-      // Alterna a classe 'closed' para abrir/fechar o menu
       sidebar.classList.toggle('closed');
       content.classList.toggle('closed');
       button.classList.toggle('closed');

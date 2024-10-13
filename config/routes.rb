@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :contatos
   get "pages/home", to: "pages#home"
   post "pages/home", to: "pages#home"
