@@ -6,7 +6,7 @@ IFS=$'\n\t'
 rm -rf /app/tmp/pids/server.pid
 
 # Compila os Assets
-rails assets:precompile
+rails assets:clobber && rails assets:precompile
 
 # Inicia o Banco
 bundle exec rails db:{drop,create,migrate,seed}

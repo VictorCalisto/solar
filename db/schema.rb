@@ -25,7 +25,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_12_110212) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.decimal "valor", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

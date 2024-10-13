@@ -21,26 +21,19 @@ class ContatosController < ApplicationController
 
   # POST /contatos or /contatos.json
   def create
-    # contato_params_modificados = contato_params
-
-    # if contato_params[:mesmoTelefone] == "true"
-    #   contato_params_modificados[:whatsapp] = contato_params[:telefone]
-    # end
 
     @contato = Contato.new(contato_params)
     @contato.mesmoTelefone = params[:contato][:mesmoTelefone]
 
-    if @contato.mesmoTelefone == "true"
+    if @contato.mesmoTelefone == "on"
       @contato.whatsapp = @contato.telefone
     end
 
     respond_to do |format|
       if @contato.save
-        format.html { redirect_to @contato, notice: "Valor de mesmoTelefone: #{@contato.mesmoTelefone}" }
-        format.json { render :show, status: :created, location: @contato }
+        format.html { redirect_to pages_home_path, notice: "Cadastrado com Sucesso. Logo entraremos em contato." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @contato.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,10 +44,8 @@ class ContatosController < ApplicationController
     respond_to do |format|
       if @contato.update(contato_params)
         format.html { redirect_to @contato, notice: "Contato was successfully updated." }
-        format.json { render :show, status: :ok, location: @contato }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @contato.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,7 +56,6 @@ class ContatosController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to contatos_path, status: :see_other, notice: "Contato was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

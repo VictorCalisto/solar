@@ -5,6 +5,8 @@ class Page < ApplicationRecord
   PRECO_PIZZA = 60
   PRECO_CHOCOLATE = 10
 
+  attr_accessor :valor
+
   validates :valor, presence: true, numericality: { greater_than: 0, message: "Minimo 0,01" }
 
   def self.calcular_quantidade(valor_mensal)

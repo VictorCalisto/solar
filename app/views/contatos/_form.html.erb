@@ -25,7 +25,7 @@
     <label for="contato_telefone" style="display: block">Telefone</label>
     <input type="text" name="contato[telefone]" id="contato_telefone" placeholder="(xx)x xxxx xxxx" onclick="formatarTelefone(this)" maxlength="11" minlength="10" required>
     <label for="mesmoTelefone">É Whatsapp ?</label>
-    <input type="checkbox" id="mesmoTelefone" checked value="true" onclick="toggleWhatsapp(this)">
+    <input type="checkbox" id="mesmoTelefone" checked name="contato[mesmoTelefone]" onclick="toggleWhatsapp(this)">
   </div>
 
   <div>
@@ -68,11 +68,9 @@
       if (checkbox.checked) {
         whatsapp.style.display = "none";
         label.style.display = "none";
-        checkbox.value = "true";
       } else {
         whatsapp.style.display = "block";
         label.style.display = "block";
-        checkbox.value = "false";
       }
     }
   </script>
