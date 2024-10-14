@@ -33,7 +33,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # Sobe o Servidor
-CMD [ "sh", "-c", "bundle exec rails server -b 0.0.0.0" ]
+CMD [ "sh", "-c", "RAILS_ENV=$RAILS_ENV bundle exec rails server -b 0.0.0.0 -p 3000" ]
 
 # Torna o container debugavel
 # CMD ["sh", "-c", "sleep infinity"]

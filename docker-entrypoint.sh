@@ -6,9 +6,9 @@ IFS=$'\n\t'
 rm -rf /app/tmp/pids/server.pid
 
 # Compila os Assets
-rails assets:clobber && rails assets:precompile
+RAILS_ENV=$RAILS_ENV rails assets:{clobber,precompile}
 
 # Inicia o Banco
-bundle exec rails db:{drop,create,migrate,seed}
+RAILS_ENV=$RAILS_ENV bundle exec rails db:{drop,create,migrate,seed}
 
 exec "$@"
