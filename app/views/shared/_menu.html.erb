@@ -55,7 +55,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: var(--accent-bg);
+    background-color: #fad58b;
     padding-top: 2vh;
     transition: 0.3s;
     overflow-x: hidden;
@@ -66,7 +66,7 @@
     padding: 1.5vh 1vw;
     text-decoration: none;
     font-size: 2vh;
-    color: var(--text);
+    color: black;
     display: block;
     transition: background-color 0.2s, color 0.2s;
   }
@@ -178,3 +178,46 @@
       button.classList.toggle('closed');
   }
 </script>
+<style>
+/* Estilos para a sidebar */
+.sidebar {
+  width: 250px; /* Largura da sidebar */
+  height: 100%; /* Altura total */
+  position: fixed; /* Fixa a sidebar na tela */
+  left: 0; /* Posiciona à esquerda */
+  top: 0; /* Alinha ao topo */
+  background-color: #fff; /* Cor de fundo da sidebar */
+  transition: transform 0.3s ease; /* Transição suave para abrir/fechar */
+  transform: translateX(-100%); /* Inicialmente escondida */
+}
+
+/* Quando a sidebar está aberta */
+.sidebar:not(.closed) {
+  transform: translateX(0); /* Mostra a sidebar */
+}
+
+/* Botão de alternar sidebar */
+#toggleBtn {
+  position: fixed; /* Fixa o botão na tela */
+  left: 100px; /* Distância do lado esquerdo */
+  top: 20px; /* Distância do topo */
+  z-index: 1000; /* Garante que o botão fique acima da sidebar */
+  background-color: #fad58b; /* Cor de fundo do botão */
+  border: none; /* Remove a borda padrão */
+  border-radius: 5px; /* Arredondar bordas */
+  padding: 10px; /* Preenchimento interno */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+  transition: transform 0.3s ease; /* Animação ao mover o botão */
+}
+
+/* Estilos adicionais para o botão em hover */
+#toggleBtn:hover {
+  background-color: #f1c26d; /* Cor de fundo ao passar o mouse */
+}
+
+/* Classe que move o botão para o meio */
+#toggleBtn.closed {
+  transform: translateX(50%); /* Mova o botão para o meio da tela */
+}
+
+</style>

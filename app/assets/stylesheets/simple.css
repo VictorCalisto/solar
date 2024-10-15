@@ -70,7 +70,7 @@ html {
 /* Make the body a nice central block */
 body {
   color: var(--text);
-  background-color: var(--bg);
+  background-color: #fad58b;
   font-size: 1.15rem;
   line-height: 1.5;
   display: grid;
@@ -83,7 +83,7 @@ body > * {
 
 /* Make the header bg full width, but the content inline with body */
 body > header {
-  background-color: var(--accent-bg);
+  background-color: #fad58b;
   border-bottom: 1px solid var(--border);
   text-align: center;
   padding: 0 0.5rem 2rem 0.5rem;
@@ -103,6 +103,9 @@ body > header p {
   max-width: 40rem;
   margin: 1rem auto;
 }
+
+
+
 
 /* Add a little padding to ensure spacing is correct between content and header > nav */
 main {
