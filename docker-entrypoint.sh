@@ -9,6 +9,6 @@ rm -rf /app/tmp/pids/server.pid
 rails assets:{clobber,precompile}
 
 # Inicia o Banco
-bundle exec rails db:{drop,create,migrate,seed}
+bundle exec rails db:{create,migrate,seed}
 
 exec "$@"
