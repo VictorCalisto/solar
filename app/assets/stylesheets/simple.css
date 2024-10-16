@@ -40,7 +40,7 @@
     --disabled: #111;
   }
   /* Add a bit of transparency so light media isn't so glaring in dark mode */
-  img,
+,
   video {
     opacity: 0.8;
   }
@@ -200,7 +200,6 @@ label[type="button"] {
   border: 1px solid var(--accent);
   background-color: var(--accent);
   color: var(--accent-text);
-  padding: 0.5rem 0.9rem;
   text-decoration: none;
   line-height: normal;
 }
@@ -558,8 +557,6 @@ mark {
 mark a {
   color: #0d47a1;
 }
-
-img,
 video {
   max-width: 100%;
   height: auto;
@@ -572,8 +569,7 @@ figure {
   overflow-x: auto;
 }
 
-figure > img,
-figure > picture > img {
+figure > picture {
   display: block;
   margin-inline: auto;
 }
