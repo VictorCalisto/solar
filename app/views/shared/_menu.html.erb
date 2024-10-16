@@ -143,12 +143,18 @@
     .content {
       margin-left: 62vw;
     }
+    
   }
 </style>
 
 <button id="toggleBtn" class="open-btn" onclick="toggleSidebar()">☰</button>
 
 <div id="mySidebar" class="sidebar">
+  <figure class="center">
+    <a href="<%= root_path %>">
+        <%= image_tag 'solar.png', size: "200x150",class: 'logo', alt: 'Imagem do Solar' %>
+    </a>
+</figure>
   <ul>
       <% if user_signed_in? %>
         <li><a href="/pages/home">Home</a></li>
