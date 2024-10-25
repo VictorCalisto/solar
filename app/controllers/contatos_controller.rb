@@ -1,12 +1,12 @@
 class ContatosController < ApplicationController
-  before_action :authenticate_user! , only: %i[ edit update destroy index]
+  before_action :authenticate_user!, only: %i[ edit update destroy index]
   before_action :set_contato, only: %i[ edit update destroy ]
 
   # GET /contatos or /contatos.json
   def index
     @contatos = Contato.all
   end
-  
+
   # GET /contatos/new
   def new
     @contato = Contato.new
@@ -18,7 +18,6 @@ class ContatosController < ApplicationController
 
   # POST /contatos or /contatos.json
   def create
-
     @contato = Contato.new(contato_params)
     @contato.mesmoTelefone = params[:contato][:mesmoTelefone]
 
@@ -64,6 +63,6 @@ class ContatosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contato_params
-      params.require(:contato).permit(:nome, :email, :telefone, :whatsapp, :horario_preferencial,:mesmoTelefone)
+      params.require(:contato).permit(:nome, :email, :telefone, :whatsapp, :horario_preferencial, :mesmoTelefone)
     end
 end

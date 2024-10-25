@@ -18,7 +18,6 @@ RSpec.describe "contatos/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", contato_path(contato), "post" do
-
       assert_select "input[name=?]", "contato[nome]"
 
       assert_select "input[name=?]", "contato[email]"

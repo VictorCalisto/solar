@@ -7,7 +7,7 @@ gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 6.4', '>= 6.4.3'
+gem "puma", "~> 6.4", ">= 6.4.3"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
@@ -43,7 +43,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-  gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
+  gem "rspec-rails", "~> 7.0", ">= 7.0.1"
+  gem "simplecov", "~> 0.22.0"
+  gem "rubocop", "~> 1.66"
 end
 
 group :development do

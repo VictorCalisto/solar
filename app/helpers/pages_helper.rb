@@ -4,9 +4,9 @@ module PagesHelper
   end
 
   def formatar_numero(numero)
-    numero_formatado = numero.to_s.gsub('.', ',')
-    partes = numero_formatado.split(',')
+    numero_formatado = numero.to_s.gsub(".", ",")
+    partes = numero_formatado.split(",")
     partes[0] = partes[0].gsub(/(\d)(?=(\d{3})+(?!\d))/, '\\1.')
-    partes.join(',')
+    partes.join(",")
   end
 end

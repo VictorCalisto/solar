@@ -10,7 +10,7 @@ module ContatosHelper
     else
       formatado = "(#{telefone[0..1]}) #{telefone[2..5]} #{telefone[6..9]}"
     end
-  
+
     formatado
   end
 end
