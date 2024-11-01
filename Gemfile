@@ -45,7 +45,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails", "~> 7.0", ">= 7.0.1"
   gem "simplecov", "~> 0.22.0"
-  gem "rubocop", "~> 1.66"
+  gem "rubocop", "~> 1.68"
 end
 
 group :development do
