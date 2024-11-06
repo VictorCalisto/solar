@@ -23,8 +23,15 @@
 
   <div>
     <%= form.label :email, "Email", style: "display: block" %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, value: funcionario.user.email%>
   </div>
+
+  <% if action_name == 'update' %>
+    <div>
+      <%= form.label :current_password, "Senha antiga", style: "display: block" %>
+      <%= form.password_field :current_password %>
+    </div>
+  <% end %>
 
   <div>
     <%= form.label :password, "Senha", style: "display: block" %>

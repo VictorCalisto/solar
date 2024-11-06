@@ -42,4 +42,66 @@ class Funcionario < ApplicationRecord
   def save!(*args)
     save(*args)
   end
+  def update(attributes, *args)
+    # Verifica se o Funcionario já possui um User associado
+    if self.user.present?
+      # Verifica se a senha antiga foi fornecida
+      if attributes[:current_password].present?
+        # Verifica se a senha antiga é válida
+        unless self.user.valid_password?(attributes[:current_password])
+          errors.add(:current_password, 'Senha atual incorreta.')
+          return false
+        end
+  
+        # Atualiza o User com os novos dados
+        user_attributes = {
+          email: attributes[:email],
+          password: attributes[:password],
+          password_confirmation: attributes[:password_confirmation]
+        }.compact # Remove campos nulos caso alguns não tenham sido alterados
+  
+        unless self.user.update(user_attributes)
+          # Adiciona erros do User ao Funcionario caso a atualização do User falhe
+          self.user.errors.each { |field, message| errors.add(field, message) }
+          return false
+        end
+      else
+        errors.add(:current_password, 'Senha atual é obrigatória para alterar a senha.')
+        return false
+      end
+    else
+      errors.add(:user, 'Usuário associado não encontrado.')
+      return false
+    end
+  
+    # Agora, chama o método update do ActiveRecord para atualizar o Funcionario
+    super(attributes.except(:email, :password, :password_confirmation, :current_password), *args)
+  rescue ActiveRecord::RecordInvalid => e
+    # Captura e adiciona qualquer erro encontrado durante a atualização
+    errors.add(:base, "Erro ao atualizar: #{e.message}")
+    false
+  end
+
+  def destroy!
+    # Verifica se o Funcionario tem um User associado
+    if user.present?
+      # Tenta excluir o User
+      begin
+        user.destroy!
+      rescue ActiveRecord::RecordNotDestroyed => e
+        # Adiciona um erro se a exclusão do User falhar
+        errors.add(:base, "Erro ao excluir o usuário associado: #{e.message}")
+        return false
+      end
+    end
+  
+    # Após excluir o User, tenta excluir o Funcionario
+    super
+  rescue ActiveRecord::RecordNotDestroyed => e
+    # Captura e adiciona qualquer erro encontrado durante a exclusão do Funcionario
+    errors.add(:base, "Erro ao excluir o funcionário: #{e.message}")
+    false
+  end
+  
+  
 end

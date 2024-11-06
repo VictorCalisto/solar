@@ -13,6 +13,7 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios/new
   def new
     @funcionario = Funcionario.new
+    @funcionario.build_user if @funcionario.user.nil?
   end
 
   # GET /funcionarios/1/edit
@@ -60,6 +61,6 @@ class FuncionariosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def funcionario_params
-      params.require(:funcionario).permit(:nome, :cargo, :email,:password, :password_confirmation)
+      params.require(:funcionario).permit(:nome, :cargo, :email,:password, :password_confirmation,:current_password)
     end
 end
