@@ -83,6 +83,7 @@ GEM
     brakeman (6.2.1)
       racc
     builder (3.3.0)
+    cancancan (3.6.1)
     capybara (3.40.0)
       addressable
       matrix
@@ -109,6 +110,8 @@ GEM
     docile (1.4.1)
     drb (2.2.1)
     erubi (1.13.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.6)
@@ -346,9 +349,11 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
+  cancancan (~> 3.6)
   capybara
   debug
   devise (~> 4.9)
+  faker (~> 3.5)
   importmap-rails
   jbuilder
   pg (~> 1.5)

@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require_relative 'config/environment' # Carrega o ambiente Rails
+
+funcionario = Funcionario.create!(
+  nome: 'Funcionario Exemplo',
+  cargo: Funcionario::CARGOS[:atendente],
+  email: 'exemplo@exemplo.com',            # Email para o novo usuário
+  password: '123456',                      # Senha para o novo usuário
+  password_confirmation: '123456'          # Confirmação de senha
+)

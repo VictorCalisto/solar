@@ -155,19 +155,20 @@
         <%= image_tag 'solar.png', size: "200x150",class: 'logo', alt: 'Imagem do Solar' %>
     </a>
 </figure>
-  <ul>
+  <ul>  
+      <li><a href="/pages/home">Home</a></li>
+      <li><a href="/contatos/new">Contato</a></li>
+      <li><a href="/pages/informacoes">Informações</a></li>
       <% if user_signed_in? %>
-        <li><a href="/pages/home">Home</a></li>
-        <li><a href="/pages/informacoes">Informações</a></li>
         <li><a href="/contatos">Contatos cadastrados</a></li>
-        <li><a href="/contatos/new">Cadastrar Contato</a></li>
+        <li><a href="/funcionarios">Funcionarios</a></li>
+        <% if @funcionario&.chefe?%>
+          <li><a href="/funcionarios/new">Cadastrar Funcionarios</a></li>
+        <% end %>
         <li>
           <%= button_to "Logout", destroy_user_session_path, method: :delete, data: {turbo_method: :delete } %>
         </li>
       <% else %>
-        <li><a href="/pages/home">Home</a></li>
-        <li><a href="/contatos/new">Contato</a></li>
-        <li><a href="/pages/informacoes">Informações</a></li>
         <li><a href="/contatos">Intranet</a></li>
       <% end %>
   </ul>
