@@ -162,7 +162,7 @@
       <% if user_signed_in? %>
         <li><a href="/contatos">Contatos cadastrados</a></li>
         <li><a href="/funcionarios">Funcionarios</a></li>
-        <% if Funcionario.find_by(user_id: current_user.id).chefe?%>
+        <% if @funcionario_logado&.chefe?%>
           <li><a href="/funcionarios/new">Cadastrar Funcionarios</a></li>
         <% end %>
         <li>

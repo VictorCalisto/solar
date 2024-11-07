@@ -1,12 +1,14 @@
 <% content_for :title, "Editing funcionario" %>
 
 <h1>Editing funcionario</h1>
-
+<% if @funcionario_logado.id == @funcionario.id%>
 <%= render "form", funcionario: @funcionario %>
+<% elsif @funcionario_logado.chefe?%>
+<%= render "form_cargo", funcionario: @funcionario %>
+<% end %>
 
 <br>
 
 <div>
-  <%= link_to "Show this funcionario", @funcionario %> |
   <%= link_to "Back to funcionarios", funcionarios_path %>
 </div>

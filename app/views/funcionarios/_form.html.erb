@@ -15,18 +15,25 @@
     <%= form.label :nome, "Nome", style: "display: block" %>
     <%= form.text_field :nome %>
   </div>
-
+  
+<% if @funcionario_logado.chefe?%>
   <div>
     <%= form.label :cargo, "Cargo", style: "display: block" %>
     <%= form.select :cargo, Funcionario::CARGOS.keys.map { |k| [k] } %>
   </div>
+<% end %>
 
   <div>
+  <% if funcionario.user.present? %>
     <%= form.label :email, "Email", style: "display: block" %>
-    <%= form.text_field :email, value: funcionario.user.email%>
-  </div>
+    <%= form.text_field :email, value: funcionario.user.email %>
+  <% else %>
+    <%= form.label :email, "Email", style: "display: block" %>
+    <%= form.text_field :email, value: "" %>
+  <% end %>
+</div>
 
-  <% if action_name == 'update' %>
+  <% if action_name == 'edit' %>
     <div>
       <%= form.label :current_password, "Senha antiga", style: "display: block" %>
       <%= form.password_field :current_password %>

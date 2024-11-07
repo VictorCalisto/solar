@@ -6,9 +6,9 @@ class FuncionariosController < ApplicationController
     @funcionarios = Funcionario.all
   end
 
-  # GET /funcionarios/1 or /funcionarios/1.json
-  def show
-  end
+  # # GET /funcionarios/1 or /funcionarios/1.json
+  # def show
+  # end
 
   # GET /funcionarios/new
   def new
@@ -22,11 +22,10 @@ class FuncionariosController < ApplicationController
 
   # POST /funcionarios or /funcionarios.json
   def create
-    @funcionario = Funcionario.new(funcionario_params)
-
+    @funcionario = Funcionario.create!(funcionario_params)
     respond_to do |format|
-      if @funcionario.save
-        format.html { redirect_to @funcionario, notice: "Funcionario was successfully created." }
+      if @funcionario.persisted?
+        format.html { redirect_to funcionarios_path, notice: "Funcionario was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -36,8 +35,8 @@ class FuncionariosController < ApplicationController
   # PATCH/PUT /funcionarios/1 or /funcionarios/1.json
   def update
     respond_to do |format|
-      if @funcionario.update(funcionario_params)
-        format.html { redirect_to @funcionario, notice: "Funcionario was successfully updated." }
+      if @funcionario.update(funcionario_params,@funcionario_logado)
+        format.html { redirect_to funcionarios_path, notice: "Funcionario was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
