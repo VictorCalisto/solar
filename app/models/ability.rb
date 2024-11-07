@@ -3,17 +3,16 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
-    return unless user.is_a?(Funcionario)
+  def initialize(funcionario)
 
-    can :read, Funcionario
-    can :update, Funcionario, id: user.id
+    return if funcionario.nil?
 
-    case user.papel
+    can :update, Funcionario, id: funcionario.id
+
+    case funcionario.cargo
     when :chefe
       can :create, Funcionario
-      can :destroy, Funcionario, id: user.id
-      can :destroy, Funcionario, id: Funcionario.where.not(id: user.id).pluck(:id)
+      can :destroy, Funcionario
     when :atendente
       cannot :create, Funcionario
       cannot :destroy, Funcionario
