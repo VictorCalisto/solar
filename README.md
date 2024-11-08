@@ -1,8 +1,10 @@
-# Bem-vindo ao Projeto "Comex" - Inicie sua Jornada!
+# Bem-vindo ao Projeto "Solar"
 
-O "Comex" é mais do que um projeto em Ruby on Rails, é o ponto de partida para uma emocionante aventura na criação de aplicações web. Este projeto, inspirado pela palavra "começo," é a oportunidade perfeita para mergulhar na empolgante jornada do desenvolvimento web.
-
-Nós simplificamos tudo para você, reduzindo o projeto a poucos arquivos leves. Seguindo as etapas abaixo, você estará pronto para lançar este projeto e ver suas ideias ganharem vida.
+Nosso objetivo e incentivar o uso de energia solar.
+para logar na intranet use
+atendente@exemplo.com
+ou 
+chefe@exemplo.com
 
 ## Pré-requisitos
 
@@ -16,11 +18,11 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 1. **Clone o repositório do projeto "comex" usando o Git:**
    
     ```bash
-        git clone https://github.com/seu_usuario/comex.git
+        git clone https://github.com/VictorCalisto/solar.git
     ```
 2. **Acesse a pasta "comex" com o comando:**
     ```bash
-        cd comex
+        cd solar
     ```
 3. **Construa e inicie o projeto usando o Docker Compose:**
     ```bash
