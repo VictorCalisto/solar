@@ -63,6 +63,4 @@ gem "pg", "~> 1.5"
 
 gem "devise", "~> 4.9"
 
-gem "cancancan", "~> 3.6"
-
 gem "faker", "~> 3.5"

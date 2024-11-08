@@ -13,6 +13,11 @@ RUN apt-get install -qy --no-install-recommends \
     libpq-dev \
     libaio1
 
+# Baixar e instalar o Node.js versão 20.0.0
+RUN curl -fsSL https://nodejs.org/dist/v20.0.0/node-v20.0.0-linux-x64.tar.gz -o node-v20.0.0-linux-x64.tar.gz \
+    && tar -zxvf node-v20.0.0-linux-x64.tar.gz -C /usr/local --strip-components=1 \
+    && rm node-v20.0.0-linux-x64.tar.gz
+
 # Define o diretório de trabalho
 WORKDIR /app
 
@@ -22,6 +27,9 @@ COPY . /app
 # Instala o Bundler
 RUN gem install bundler
 RUN bundle install -j $(nproc)
+
+# Instalar as dependências do npm
+RUN npm install --no-save --no-cache
 
 # Limpar o cache do apt-get e outros arquivos temporários
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

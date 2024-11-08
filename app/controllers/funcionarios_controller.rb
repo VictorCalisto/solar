@@ -1,6 +1,6 @@
 class FuncionariosController < ApplicationController
-  before_action :set_funcionario, only: %i[ show edit update destroy ]
-
+  before_action :set_funcionario, only: %i[ edit update destroy ]
+  before_action :authenticate_user!
   # GET /funcionarios or /funcionarios.json
   def index
     @funcionarios = Funcionario.all
@@ -8,7 +8,7 @@ class FuncionariosController < ApplicationController
 
   # # GET /funcionarios/1 or /funcionarios/1.json
   # def show
-  # end
+  # end 
 
   # GET /funcionarios/new
   def new
@@ -18,6 +18,7 @@ class FuncionariosController < ApplicationController
 
   # GET /funcionarios/1/edit
   def edit
+    
   end
 
   # POST /funcionarios or /funcionarios.json
@@ -45,10 +46,12 @@ class FuncionariosController < ApplicationController
 
   # DELETE /funcionarios/1 or /funcionarios/1.json
   def destroy
-    @funcionario.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to funcionarios_path, status: :see_other, notice: "Funcionario was successfully destroyed." }
+    if @funcionario_logado.chefe?
+      @funcionario.destroy
+       redirect_to funcionarios_path, notice: "Funcionario foi excluido."
+    else
+      redirect_to funcionarios_path, notice: "Você não tem permissão para excluir Funcionario."
     end
   end
 
