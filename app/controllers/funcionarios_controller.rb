@@ -8,7 +8,7 @@ class FuncionariosController < ApplicationController
 
   # # GET /funcionarios/1 or /funcionarios/1.json
   # def show
-  # end 
+  # end
 
   # GET /funcionarios/new
   def new
@@ -18,7 +18,6 @@ class FuncionariosController < ApplicationController
 
   # GET /funcionarios/1/edit
   def edit
-    
   end
 
   # POST /funcionarios or /funcionarios.json
@@ -36,7 +35,7 @@ class FuncionariosController < ApplicationController
   # PATCH/PUT /funcionarios/1 or /funcionarios/1.json
   def update
     respond_to do |format|
-      if @funcionario.update(funcionario_params,@funcionario_logado)
+      if @funcionario.update(funcionario_params, @funcionario_logado)
         format.html { redirect_to funcionarios_path, notice: "Funcionario was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,7 +45,6 @@ class FuncionariosController < ApplicationController
 
   # DELETE /funcionarios/1 or /funcionarios/1.json
   def destroy
-
     if @funcionario_logado.chefe?
       @funcionario.destroy
        redirect_to funcionarios_path, notice: "Funcionario foi excluido."
@@ -63,6 +61,6 @@ class FuncionariosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def funcionario_params
-      params.require(:funcionario).permit(:nome, :cargo, :email,:password, :password_confirmation,:current_password)
+      params.require(:funcionario).permit(:nome, :cargo, :email, :password, :password_confirmation, :current_password)
     end
 end

@@ -6,7 +6,7 @@ def gerar_email(nome)
   nome_sem_acentos.gsub(/\s+/, '.').gsub(/[^a-z.]/, '') + '@exemplo.com'
 end
 
-def gerar_nome()
+def gerar_nome
   nome_completo = Faker::Name.name
 
   while nome_completo !~ /\A[a-zA-ZÀ-ÿ\s]+\z/
@@ -50,7 +50,7 @@ end
 10.times do
   nome = gerar_nome()
   email = gerar_email(nome)
-  
+
   Contato.create!(
     nome: nome,
     email: email,

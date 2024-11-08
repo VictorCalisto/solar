@@ -1,9 +1,9 @@
 class Funcionario < ApplicationRecord
-  belongs_to :user,dependent: :destroy 
+  belongs_to :user, dependent: :destroy
 
-  attr_accessor :email,:password,:password_confirmation
+  attr_accessor :email, :password, :password_confirmation
 
-  CARGOS = { atendente: 'atendente', chefe: 'chefe' }.freeze
+  CARGOS = { atendente: "atendente", chefe: "chefe" }.freeze
 
   validates :nome, presence: true
   validates :cargo, presence: true, inclusion: { in: CARGOS.values }
@@ -18,9 +18,9 @@ class Funcionario < ApplicationRecord
         user.password = params[:password]
         user.password_confirmation = params[:password_confirmation]
       end
-      
+
       params[:user_id] = user.id
-      
+
       super(params.except(:email, :password, :password_confirmation))
     end
   end
@@ -37,7 +37,7 @@ class Funcionario < ApplicationRecord
     super(*args)
   rescue ActiveRecord::RecordInvalid => e
     errors.add(:base, "Erro ao salvar o usuário ou funcionário: #{e.message}")
-    return false
+    false
   end
   def save!(*args)
     save(*args)
@@ -45,14 +45,14 @@ class Funcionario < ApplicationRecord
 
   def update!(params, funcionario_logado)
     update_user(params)
-    
+
     if params[:cargo].present? && !funcionario_logado.chefe?
-      errors.add(:cargo, 'Somente um usuário chefe pode alterar o cargo.')
+      errors.add(:cargo, "Somente um usuário chefe pode alterar o cargo.")
       return false
     end
 
     if params.except(:cargo).to_unsafe_h.any? && funcionario_logado.id != self.id && !funcionario_logado.chefe?
-      errors.add(:base, 'Somente o próprio funcionário ou um chefe pode editar esses dados.')
+      errors.add(:base, "Somente o próprio funcionário ou um chefe pode editar esses dados.")
       return false
     end
 
@@ -61,17 +61,16 @@ class Funcionario < ApplicationRecord
   def update(params, funcionario_logado)
     update!(params, funcionario_logado)
   end
-  
+
   private
-  
+
   def update_user(params)
     if params[:email]
       user.update!(email: params[:email])
     end
-  
+
     if params[:current_password].present? && user.valid_password?(params[:current_password])
       user.update!(password: params[:password], password_confirmation: params[:password_confirmation])
     end
   end
-    
 end
