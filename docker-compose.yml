@@ -18,6 +18,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       RAILS_ENV: ${RAILS_ENV}
+      PGHOST: ${PGHOST}
+      PGPORT: ${PGPORT}
     depends_on:
       - postgres  
 
